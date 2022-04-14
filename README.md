@@ -1,3 +1,3 @@
-# mini-project
+# Mini-Project (Final)
 
-Find the distance from a receiver and a reflecting object (wall)
+Find the distance from a receiver and a reflecting object (wall).
