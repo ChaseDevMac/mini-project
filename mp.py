@@ -28,7 +28,8 @@ config = json.loads(data)
 
 xt = np.array(config["training data"])
 
-samplerate, data = wavfile.read(received_audio)
+print(received_audio)
+samplerate, data = wavfile.read('./CybertoriumMono.wav')
 
 if (samplerate != config["samplerate"]):
     print(f"""Inconsistent samplerates\n
