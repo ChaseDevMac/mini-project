@@ -1,10 +1,11 @@
 import argparse
-from scipy.io import wavfile
+import soundfile as sf
 import numpy as np
 import matplotlib.pyplot as plt
 import json
 
-parser = argparse.ArgumentParser(description="Generate a repeated signal")
+parser = argparse.ArgumentParser(description="""Generate training data by using
+                                                a uncompressed audio signal""")
 parser.add_argument("-s", metavar="--start", type=float,
                     help="start of repeated signal in seconds")
 parser.add_argument("-int", metavar="--interval", type=float,
@@ -14,7 +15,7 @@ parser.add_argument("-d", metavar="--duration", type=float,
 parser.add_argument("-p", metavar="--plot", type=bool,
                     help="whether a plot should be made for singal (bool)")
 parser.add_argument("-i", metavar="--input-signal", type=str,
-                    help="name of audio file in wav format")
+                    help="name of audio file in an uncompressed audio format")
 parser.add_argument("-tx", metavar="--transmit-signal", type=str,
                     help="name of audio signal/file to be transmitted")
 parser.add_argument("-td", metavar="--training-data", type=str,
@@ -31,7 +32,7 @@ training_file = args.td or "training_data.txt"
 config_file = args.c or "signal_config.json"
 
 # import white noise file
-samplerate, data = wavfile.read(input_audio)
+data, samplerate = sf.read(input_audio)
 
 # determine starting index of audio singal
 start = int(args.s * samplerate if args.s else (len(data) / 2))
@@ -49,7 +50,7 @@ if (args.p):
     plt.show()
 
 # output the audio to be transmitted
-wavfile.write(transmit_audio, samplerate, output_data)
+sf.write(transmit_audio, output_data, samplerate)
 
 # write the configuration of the signal
 config_file = open(config_file, "w")
