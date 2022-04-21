@@ -17,5 +17,5 @@ Find the distance from a receiver and a reflecting object (wall) using audio sig
   ```
 
 ## Usage Example
-1) run ```python gen_transmit_signal -tx white_noise.wav```
-2) run ```python mp.py -r demo.wav```
+1) run ```python gen_transmit_signal -i demo/white_noise.wav -s 0.1 -int 0.1```
+2) run ```python mp.py -r demo/received.wav -d 0.3048```
